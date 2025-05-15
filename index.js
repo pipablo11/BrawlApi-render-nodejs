@@ -6,7 +6,7 @@ const app = express();
 const options = {
     method : 'GET',
     headers : {
-        'Authorization' : '${process.env.API_KEY}',
+        'Authorization' : 'Bearer ${process.env.API_KEY}',
         'Content-Type' : 'application/json'
     } 
 }
