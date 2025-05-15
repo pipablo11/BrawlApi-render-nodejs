@@ -3,15 +3,14 @@ import express from "express"; //para usar import --> in package.json: "type" : 
 const app = express();
 
 // para acceder a la API puede ser necesarios unos headers o una API key en la query string
-/*
 const options = {
     method : 'GET',
     headers : {
-        'Authorization' : 'Bearer API_KEY'
-    }
+        'Authorization' : 'Bearer ${process.env.API_KEY}',
+        'Content-Type' : 'application/json'
+    } 
 }
-fetch(url, options).then(res => res.json()).then(json => console.log(json));
-*/
+
 const headers = new Headers({
   "Content-Type": "application/json",
   "x-api-key": "DEMO-API-KEY"
@@ -26,10 +25,10 @@ var requestOptions = {
      
 
 app.get("/", (req, res) => {
-    fetch("https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1", requestOptions)
-  .then(response => response.text())
-  .then(result => res.send(result))
-  .catch(error => res.send('error', error));   
+    fetch('https://api.brawlstars.com/v1/players/%23YCRVPVPV/battlelog', options)
+    .then(response => response.json())
+    .then(json => {res.send(json);})
+    .catch(err => console.error('error:' + err));
 })
 
 app.listen(3000, () => {
