@@ -6,7 +6,7 @@ const app = express();
 const options = {
     method : 'GET',
     headers : {
-        'Authorization' : 'Bearer ${process.env.API_KEY}',
+        'Authorization' : '${process.env.API_KEY}',
         'Content-Type' : 'application/json'
     } 
 }
@@ -26,6 +26,13 @@ var requestOptions = {
 
 app.get("/", (req, res) => {
     fetch('https://api.brawlstars.com/v1/players/%23YCRVPVPV/battlelog', options)
+    .then(response => response.json())
+    .then(json => {res.send(json);})
+    .catch(err => console.error('error:' + err));
+})
+
+app.get("/ip", (req, res) => {
+    fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(json => {res.send(json);})
     .catch(err => console.error('error:' + err));
