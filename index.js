@@ -1,12 +1,15 @@
 //require("express");
 import express from "express"; //para usar import --> in package.json: "type" : "module"
+import dotenv from 'dotenv'; //para usar variables de entorno
+dotenv.config();
 const app = express();
-
+const API_KEY = process.env.API_KEY;
+const PORT = process.env.PORT || 3000;
 // para acceder a la API puede ser necesarios unos headers o una API key en la query string
 const options = {
     method : 'GET',
     headers : {
-        'Authorization' : 'Bearer ${process.env.API_KEY}',
+        'Authorization' : `Bearer ${API_KEY}`,
         'Content-Type' : 'application/json'
     } 
 }
